@@ -47,7 +47,6 @@ public class FrontController extends HttpServlet {
 		switch (command) {
 		
 		case "/index.pheak":
-			
 			action = new ListStudent();
 			try {
 				forward = action.execute(request, response);

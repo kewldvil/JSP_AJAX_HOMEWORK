@@ -85,19 +85,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script>
         $(document).ready(function() {
-            firstLoad();
+            getStudentList();
 
-            function firstLoad() {
-                $.post('index.pheak', function(listStudent) {
-                    loadStudentList(listStudent);
-                    $('a').click(function() {
-                        var id = $(this).attr("id");
-                        updateStudent(id);
-                    });
-                });
-            }
-
-            function loadStudentList(JSONData) {
+            function setTableData(JSONData) {
                 var tableHead = "";
                 tableHead += '<table class="table">';
                 tableHead += '<thead>';
@@ -128,43 +118,35 @@
                 });
 
             }
-
-            function updateStudent(id) {
-                $.post('updateStudent.pheak', {
-                    id: id
-                }, function(listStudent) {
-                    $('.table-responsive').empty();
-                    firstLoad();
-
-                });
-            }
-
-            function secondLoad() {
-                var name = $('#name').val();
+            function getStudentList() {
+            	var name = $('#name').val();
                 var status = $('#status').val();
                 var classes = $('#class').val();
-                $.post('index.pheak', {
-                    name: name,
-                    classes: classes,
-                    status: status
-                }, function(listStudent) {
-                    loadStudentList(listStudent);
-                    $('a').click(function() {
-                        var id = $(this).attr("id");
-                        updateStudent(id);
-                    });
+                $.post('index.pheak',{name: name,classes: classes,status: status}, function(JSONData) {
+                    setTableData(JSONData);
+                        updateStatus();
+                });
+            }
+            function updateStatus() {
+            	$('a').click(function(e) {
+            		var id = $(this).attr("id");
+            		var img=$(this).children().attr("src");
+            		$(this).children().attr("src") == "img/active.png" ? $(this).children().attr("src", "img/inActive.png") : $(this).children().attr("src", "img/active.png");
+                $.post('updateStudent.pheak', {
+                    id: id
+                });
                 });
             }
             $('#name').keyup(function(e) {
-                secondLoad();
+                getStudentList();
                 e.preventDefault();
             });
             $('#class').on('change', function(e) {
-                secondLoad();
+                getStudentList();
                 e.preventDefault();
             });
             $('#status').on('change', function() {
-                secondLoad();
+                getStudentList();
                 e.preventDefault();
             });
         });
