@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.student.ListStudent;
 import controller.student.UpdateStudent;
 
+
 @WebServlet("*.pheak")
 public class FrontController extends HttpServlet {
 
@@ -44,8 +45,9 @@ public class FrontController extends HttpServlet {
 		System.out.println(command);
 
 		switch (command) {
-
+		
 		case "/index.pheak":
+			
 			action = new ListStudent();
 			try {
 				forward = action.execute(request, response);
