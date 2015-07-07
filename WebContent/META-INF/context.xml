@@ -1,11 +1,12 @@
 <Context>
-	<Resource name="sopheakdb"
+	<Resource name="sopheakdb"		
 		auth="Container"
 		type="javax.sql.DataSource"
-		maxActive="15"
-		maxIdle="20"
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		maxActive="150"
+		maxIdle="2000"
 		username="postgres"
-		password="root"
+		password="123456"
 		driverClassName="org.postgresql.Driver"
 		url="jdbc:postgresql://localhost:5432/employeedb"/>
 </Context>
