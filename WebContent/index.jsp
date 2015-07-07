@@ -118,25 +118,33 @@
                 });
 
             }
+
             function getStudentList() {
-            	var name = $('#name').val();
+                var name = $('#name').val();
                 var status = $('#status').val();
                 var classes = $('#class').val();
-                $.post('index.pheak',{name: name,classes: classes,status: status}, function(JSONData) {
+                $.post('index.pheak', {
+                    name: name,
+                    classes: classes,
+                    status: status
+                }, function(JSONData) {
                     setTableData(JSONData);
-                        updateStatus();
+                    $('a').click(function(e) {
+                        updateStatus($(this));
+                    });
                 });
             }
-            function updateStatus() {
-            	$('a').click(function(e) {
-            		var id = $(this).attr("id");
-            		var img=$(this).children().attr("src");
-            		$(this).children().attr("src") == "img/active.png" ? $(this).children().attr("src", "img/inActive.png") : $(this).children().attr("src", "img/active.png");
+
+            function updateStatus(selector) {
+                var id = selector.attr("id");
+                var img = selector.children().attr("src");
                 $.post('updateStudent.pheak', {
                     id: id
-                });
+                }, function() {
+                    selector.children().attr("src") == "img/active.png" ? selector.children().attr("src", "img/inActive.png") : selector.children().attr("src", "img/active.png");
                 });
             }
+
             $('#name').keyup(function(e) {
                 getStudentList();
                 e.preventDefault();
