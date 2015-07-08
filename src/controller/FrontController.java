@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.student.GetClass;
 import controller.student.ListStudent;
 import controller.student.UpdateStudent;
 
@@ -54,6 +55,14 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/className.pheak":
+			action = new GetClass();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;	
 		case "/updateStudent.pheak":
 			action = new UpdateStudent();
 			try {

@@ -59,11 +59,7 @@
                             </div>
                             <div class="col-md-3">
                                 <select name="class" id="class" class="form-control">
-                                    <option value="">All Class</option>
-                                    <option value="BTB">BTB</option>
-                                    <option value="KPS">KPS</option>
-                                    <option value="SR">SR</option>
-                                    <option value="PP">PP</option>
+                                    <!-- Load from jQuery -->
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -86,6 +82,7 @@
         <script>
         $(document).ready(function() {
             getStudentList();
+            getClassName();
 
             function setTableData(JSONData) {
                 var tableHead = "";
@@ -116,7 +113,19 @@
                     content += '</tr>';
                     $('tbody').append(content);
                 });
+            }
 
+            function getClassName() {
+                $.post('className.pheak', function(data) {
+                    setSelectOption(data);
+                });
+            }
+
+            function setSelectOption(JSONClassname) {
+                $('#class').html($("<option></option>").attr("value", "").text("All Class"));
+                $.each(JSONClassname, function(i, item) {
+                    $('#class').append($("<option></option>").attr("value", item).text(item));
+                });
             }
 
             function getStudentList() {

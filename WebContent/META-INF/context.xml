@@ -6,7 +6,7 @@
 		maxActive="150"
 		maxIdle="2000"
 		username="postgres"
-		password="root"
+		password="123456"
 		driverClassName="org.postgresql.Driver"
 		url="jdbc:postgresql://localhost:5432/employeedb"/>
 </Context>

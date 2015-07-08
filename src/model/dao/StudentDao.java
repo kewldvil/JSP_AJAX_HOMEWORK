@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import model.dto.StudentDto;
 
@@ -48,7 +49,15 @@ public class StudentDao {
 		con.close();
 		return tempList;
 	}
-
+	public ArrayList<String> getAllClassName() throws SQLException{
+		java.sql.PreparedStatement ps = con.prepareStatement("select distinct class from student_tbl");
+		ResultSet rs=ps.executeQuery();
+		ArrayList<String> classes= new ArrayList<>();
+		while(rs.next()){
+			classes.add(rs.getString("class"));
+		}
+		return classes;
+	}
 	public boolean updateStudent(String id) throws SQLException {
 		java.sql.PreparedStatement ps = con.prepareStatement("update student_tbl set status=NOT status where id=?");
 		ps.setString(1, id);
