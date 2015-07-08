@@ -30,7 +30,7 @@ public class StudentDao {
 		classes=params.length >1 ? params[1]:"";
 		status=params.length >2 ? params[2]:"";
 		ArrayList<StudentDto> tempList = new ArrayList();
-		java.sql.PreparedStatement ps = con.prepareStatement("select * from student_tbl where name like ? and class like ? and cast(status as text) like ? order by id asc");
+		java.sql.PreparedStatement ps = con.prepareStatement("select * from student_tbl where lower(name) like ? and class like ? and cast(status as text) like ? order by id asc");
 		ps.setString(1,"%"+ name+"%");
 		ps.setString(2, "%"+ classes+"%");
 		ps.setString(3, "%"+ status+"%");

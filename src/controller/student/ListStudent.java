@@ -16,9 +16,9 @@ public class ListStudent implements IAction {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String name = request.getParameter("name")==null?"":request.getParameter("name");
-		String classes = request.getParameter("classes")==null?"":request.getParameter("classes");
-		String status = request.getParameter("status")==null?"":request.getParameter("status");
+		String name = request.getParameter("name");
+		String classes =request.getParameter("classes");
+		String status = request.getParameter("status");
 		ArrayList<StudentDto> studentList= new StudentDao().listStudent(name,classes,status);
 		
 		response.setContentType("application/json");
