@@ -17,16 +17,16 @@ public class UpdateStudent implements IAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
-		new StudentDao().updateStudent(id);
-		ArrayList<StudentDto> studentList= new StudentDao().listStudent();
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		String listStudent= new Gson().toJson(studentList);
-					
+		System.out.println(new StudentDao().updateStudent(id));
+//		ArrayList<StudentDto> studentList= new StudentDao().listStudent();
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+//		String listStudent= new Gson().toJson(studentList);
+//					
 //		request.setAttribute("listStudent", listStudent);
-		response.getWriter().write(listStudent);
+//		response.getWriter().write(listStudent);
 		
-		System.out.println(listStudent);
+	//	System.out.println(listStudent);
 		return null;
 	}
 

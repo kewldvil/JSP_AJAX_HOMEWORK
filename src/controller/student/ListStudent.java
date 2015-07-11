@@ -23,12 +23,12 @@ public class ListStudent implements IAction {
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		String listStudent= new Gson().toJson(studentList);
+//		String listStudent= new Gson().toJson(studentList);
 					
-//		request.setAttribute("listStudent", listStudent);
-		response.getWriter().write(listStudent);
+		request.setAttribute("listStudent", studentList);
+//		response.getWriter().write(listStudent);
 		System.out.println(name);
-		System.out.println(listStudent);
+		System.out.println(studentList);
 		
 		
 		

@@ -72,4 +72,50 @@ public class StudentDao {
 			return false;
 		}
 	}
+	public boolean deleteStudent(String id) throws SQLException{
+		java.sql.PreparedStatement ps = con.prepareStatement("delete from student_tbl where id=?");
+		ps.setString(1, id);
+		int result = ps.executeUpdate();
+		if (result > 0) {
+			System.out.println("delete sucess");
+			con.close();
+			return true;
+		} else {
+			System.out.println("delete fail");
+			con.close();
+			return false;
+		}
+	}
+	public boolean insertNewStudent(String id,String name,int gender,String university,String classes,boolean status) throws SQLException{
+		java.sql.PreparedStatement ps = con.prepareStatement("insert into student_tbl values(?,?,?,?,?,?)");
+		ps.setString(1, id);
+		ps.setString(2,name);
+		ps.setInt(3, gender);
+		ps.setString(4, university);
+		ps.setString(5, classes);
+		ps.setBoolean(6,status);
+		int result = ps.executeUpdate();
+		if (result > 0) {
+			System.out.println("insert sucess");
+			con.close();
+			return true;
+		} else {
+			System.out.println("insert fail");
+			con.close();
+			return false;
+		}
+	}
+	public boolean validateStudentId(String id) throws SQLException{
+		java.sql.PreparedStatement ps = con.prepareStatement("select * from student_tbl where id=? ");
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+		if(rs.isBeforeFirst()){
+			System.err.println("No duplicate Id");
+			return true;
+		}else{
+			System.err.println("Duplicate Id");
+			return false;
+		}
+		
+	}
 }

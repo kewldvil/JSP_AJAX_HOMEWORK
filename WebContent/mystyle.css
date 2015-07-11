@@ -1,0 +1,40 @@
+        body {
+            background-color: #F2F1EF;
+        }
+/*        label{
+            text-align: center !important;
+        }*/
+        #myAddBtn {
+            background-color: rgb(26, 188, 156);
+            border-color: transparent;
+        }
+        
+        .modalHeaderColor {
+            background-color: #4183D7;
+            color: #ffffff;
+        }
+        
+        th {
+            border-collapse: collapse;
+            border-right: 1px solid #ffffff;
+            border-bottom: 1px solid #ffffff;
+            background-color: #4183D7;
+            color: #fff;
+            text-align: center !important;
+        }
+        
+        th:last-child {
+            border-right: 1px solid gray;
+        }
+        
+        table,
+        thead>tr,
+        td {
+            border-collapse: collapse;
+            border: 1px solid gray;
+            text-align: center;
+        }
+        
+        tbody {
+            background-color: #ffffff;
+        }

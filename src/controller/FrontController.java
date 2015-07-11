@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.student.AddStudent;
+import controller.student.DeleteStudent;
 import controller.student.GetClass;
+import controller.student.ValidateStudentId;
 import controller.student.ListStudent;
 import controller.student.UpdateStudent;
 
@@ -41,35 +44,29 @@ public class FrontController extends HttpServlet {
 		System.out.println(contextPath);
 		String command = requestURI.substring(contextPath.length());
 		ActionForward forward = null;
-		IAction action = null;
+		IAction iAction = null;
 
 		System.out.println(command);
 
 		switch (command) {
 		
 		case "/index.pheak":
-			action = new ListStudent();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			iAction = new ListStudent();
+			break;
+		case "/validateStudentId.pheak":
+			iAction = new ValidateStudentId();
+			break;
+		case "/addStudent.pheak":
+			iAction = new AddStudent();
 			break;
 		case "/className.pheak":
-			action = new GetClass();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			iAction = new GetClass();
 			break;	
 		case "/updateStudent.pheak":
-			action = new UpdateStudent();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			iAction = new UpdateStudent();
+			break;
+		case "/deleteStudent.pheak":
+			iAction = new DeleteStudent();
 			break;
 		default:
 			forward = new ActionForward();
@@ -78,7 +75,13 @@ public class FrontController extends HttpServlet {
 			break;
 
 		}
-
+		
+		try {
+			forward = iAction.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
