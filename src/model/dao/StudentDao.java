@@ -110,11 +110,11 @@ public class StudentDao {
 		ps.setString(1, id);
 		ResultSet rs = ps.executeQuery();
 		if(rs.isBeforeFirst()){
-			System.err.println("No duplicate Id");
-			return true;
-		}else{
 			System.err.println("Duplicate Id");
 			return false;
+		}else{
+			System.err.println("No duplicate Id");
+			return true;
 		}
 		
 	}

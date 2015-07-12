@@ -12,7 +12,9 @@ public class ValidateStudentId implements IAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
-		response.getWriter().write(new StudentDao().validateStudentId(id));
+		response.getWriter().write(Boolean.toString(new StudentDao().validateStudentId(id)));
+		
+		System.out.println(new StudentDao().validateStudentId(id));
 		return null;
 	}
 

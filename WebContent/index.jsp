@@ -45,6 +45,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- new and edit student modal -->
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -102,7 +104,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="addStudent">Add</button>
+                            <button type="button" class="btn btn-primary" id="addStudentBtn">Add</button>
                         </div>
                         </div>
                     </div>

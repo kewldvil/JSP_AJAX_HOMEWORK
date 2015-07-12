@@ -56,7 +56,7 @@ public class FrontController extends HttpServlet {
 		case "/validateStudentId.pheak":
 			iAction = new ValidateStudentId();
 			break;
-		case "/addStudent.pheak":
+		case "/insertStudent.pheak":
 			iAction = new AddStudent();
 			break;
 		case "/className.pheak":
