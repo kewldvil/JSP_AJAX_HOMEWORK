@@ -129,11 +129,12 @@
                     $.post('validateStudentId.pheak', {
                         id: id
                     }, function(data) {
-                        if(data=="true"){
+                        if (data == "true") {
                             addStudent();
                             $('#myModal').modal('hide');
-                        }else{
-                            alert("duplicate");
+                        } else {
+                            $('.modal-body div:first-child div:first-child').addClass('has-error');
+                            $('#idModal').text("This ID already existed !");
                         }
                     });
                 }

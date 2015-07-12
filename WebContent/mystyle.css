@@ -1,9 +1,10 @@
         body {
             background-color: #F2F1EF;
         }
-/*        label{
+        /*        label{
             text-align: center !important;
         }*/
+        
         #myAddBtn {
             background-color: rgb(26, 188, 156);
             border-color: transparent;
@@ -14,6 +15,11 @@
             color: #ffffff;
         }
         
+        .errorMessage {
+            font-size: 11px;
+            color: red;
+        }
+        
         th {
             border-collapse: collapse;
             border-right: 1px solid #ffffff;
@@ -21,6 +27,10 @@
             background-color: #4183D7;
             color: #fff;
             text-align: center !important;
+        }
+        
+        .form-control-feedback {
+            right: 10px;
         }
         
         th:last-child {

@@ -60,12 +60,16 @@
 							    	<label class="col-sm-3 control-label">ID</label>
 							    	<div class="col-sm-9">
 							      		<input type="text" class="form-control" name="id" id="id">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <span class="errorMessage" id="idModal"></span>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label class="col-sm-3 control-label">Name</label>
 							    	<div class="col-sm-9">
 							      		<input type="text" class="form-control" name="nameModal" id="nameModal">
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" ></span>
+                                        <span class="errorMessage"></span>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
