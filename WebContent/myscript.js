@@ -100,12 +100,13 @@
                     });
 
                 }
-                function updateModal(selector){
+
+                function updateModal(selector) {
                     $('#addStudentBtn').text('Update');
                     $('#addStudentBtn').attr('id', 'updateStudentBtn');
                     var id = selector.attr('id');
                     var name = selector.parentsUntil('tbody').find('td').eq(1).text();
-                    var gender = selector.parentsUntil('tbody').find('td').eq(2).text()=='Male'?1:0;
+                    var gender = selector.parentsUntil('tbody').find('td').eq(2).text() == 'Male' ? 1 : 0;
                     var university = selector.parentsUntil('tbody').find('td').eq(3).text();
                     var classes = selector.parentsUntil('tbody').find('td').eq(4).text();
 
@@ -116,6 +117,7 @@
                     $('#university').val(university);
                     $('#classes').val(classes);
                 }
+
                 function deleteRow(selector) {
                     selector.parentsUntil("tbody").remove();
                 }
@@ -136,7 +138,6 @@
                         getStudentList();
                     });
                 }
-
 
                 function updateStudent(updateID) {
                     var id = updateID;
@@ -194,6 +195,14 @@
                         }
                     });
                 }
+                $('#myAddBtn').click(function(e) {
+                    $('#id').removeProp('readonly');
+                    $('#id').val('');
+                    $('#nameModal').val('');
+                    $('#gender option[value=1]').attr('selected','selected');
+                    $('#university option[value="SETEC"]').attr('selected','selected');
+                    $('#classes option[value="PP"]').attr('selected','selected');
+                });
                 $('#myModal').on('hidden.bs.modal', function() {
                     $('.form-group').removeClass('has-error');
                     $('span').removeClass('glyphicon-remove');
