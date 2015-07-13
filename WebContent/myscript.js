@@ -29,7 +29,7 @@
                         content += '<td>' + student.university + '</td>';
                         content += '<td>' + student.classes + '</td>';
                         content += '<td><a href="#" id="' + student.id + '" class="statusLink"><img src="img/' + imageUrl + '" width="25px" height="25px" /></a></td>';
-                        content += '<td><a href="#" id="' + student.id + '"><img src="img/edit.png" width="25px" height="25px" title="Edit"/></a>&nbsp;&nbsp;&nbsp;<a href="#" id="' + student.id + '" class="delete"><img src="img/delete.png" width="25px" height="25px" title="Delete"/></a></td>';
+                        content += '<td><a href="#" id="' + student.id + '" class="update" data-toggle="modal" data-target="#myModal"><img src="img/edit.png" width="25px" height="25px" title="Edit"/></a>&nbsp;&nbsp;&nbsp;<a href="#" id="' + student.id + '" class="delete"><img src="img/delete.png" width="25px" height="25px" title="Delete"/></a></td>';
                         content += '</tr>';
                         $('tbody').append(content);
                     });
@@ -69,13 +69,16 @@
                         $('.delete').click(function(e) {
                             deleteStudent($(this));
                         });
+                        $('.update').click(function(e) {
+                            updateModal($(this));
+                        });
                     });
                 }
 
                 function updateStatus(selector) {
                     var id = selector.attr("id");
                     var img = selector.children().attr("src");
-                    $.post('updateStudent.pheak', {
+                    $.post('updateStatus.pheak', {
                             id: id
                         },
                         function() {
@@ -97,7 +100,22 @@
                     });
 
                 }
+                function updateModal(selector){
+                    $('#addStudentBtn').text('Update');
+                    $('#addStudentBtn').attr('id', 'updateStudentBtn');
+                    var id = selector.attr('id');
+                    var name = selector.parentsUntil('tbody').find('td').eq(1).text();
+                    var gender = selector.parentsUntil('tbody').find('td').eq(2).text()=='Male'?1:0;
+                    var university = selector.parentsUntil('tbody').find('td').eq(3).text();
+                    var classes = selector.parentsUntil('tbody').find('td').eq(4).text();
 
+                    $('#id').prop('readonly', true);
+                    $('#id').val(id);
+                    $('#nameModal').val(name);
+                    $('#gender').val(gender);
+                    $('#university').val(university);
+                    $('#classes').val(classes);
+                }
                 function deleteRow(selector) {
                     selector.parentsUntil("tbody").remove();
                 }
@@ -118,11 +136,48 @@
                         getStudentList();
                     });
                 }
-                $('#addStudentBtn').click(function(e) {
+
+
+                function updateStudent(updateID) {
+                    var id = updateID;
+                    var name = $('#nameModal').val();
+                    var gender = $('#gender').val();
+                    var university = $('#university').val();
+                    var classes = $('#classes').val();
+                    $.post('updateStudent.pheak', {
+                        id: id,
+                        name: name,
+                        gender: gender,
+                        university: university,
+                        classes: classes
+                    }, function() {
+                        getStudentList();
+                    });
+                }
+                $('button:contains("Add")').click(function(e) {
                     if ($('#id').val() != "" && $('#nameModal').val() != "") {
                         var id = $('#id').val();
                         valideStudentId(id);
+                    } else if ($('#id').val() == "" && $('#nameModal').val() == "") {
+                        $('.modal-body').find('.form-group').eq(0).addClass('has-error');
+                        $('.modal-body').find('.form-group').eq(1).addClass('has-error');
+                        $('.glyphicon').addClass('glyphicon-remove');
+                        $('#nameSpan').text('Name can not be empty !');
+                        $('#idModal').text('ID can not be empty !');
+                    } else if ($('#id').val() == "") {
+                        $('.modal-body').find('.form-group').eq(0).addClass('has-error');
+                        $('#span1').addClass('glyphicon-remove');
+                        $('#idModal').text('ID can not be empty !');
+                    } else if ($('#nameModal').val() == "") {
+                        $('.modal-body').find('.form-group').eq(1).addClass('has-error');
+                        $('#nameSpan').text('Name can not be empty !');
+                        $('#span2').addClass('glyphicon-remove');
                     }
+                });
+                $('input[type="text"]').focus(function(e) {
+                    $('.form-group').removeClass('has-error');
+                    $('span').removeClass('glyphicon-remove');
+                    $('span').text('');
                 });
 
                 function valideStudentId(id) {
@@ -135,9 +190,15 @@
                         } else {
                             $('.modal-body div:first-child div:first-child').addClass('has-error');
                             $('#idModal').text("This ID already existed !");
+                            $('#span1').addClass('glyphicon-remove');
                         }
                     });
                 }
+                $('#myModal').on('hidden.bs.modal', function() {
+                    $('.form-group').removeClass('has-error');
+                    $('span').removeClass('glyphicon-remove');
+                    $('span').text('');
+                })
                 $('#name').keyup(function(e) {
                     getStudentList();
                     e.preventDefault();

@@ -36,7 +36,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                            	<button class="btn btn-success btn-block" data-toggle="modal" data-target="#myModal" id="myAddBtn">Add New</button>
+                            	<button class="btn btn-success btn-block" data-toggle="modal" data-target="#myModal" id="myAddBtn">New Student</button>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
 							    	<label class="col-sm-3 control-label">ID</label>
 							    	<div class="col-sm-9">
 							      		<input type="text" class="form-control" name="id" id="id">
-                                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <span class="glyphicon form-control-feedback" id="span1"></span>
                                         <span class="errorMessage" id="idModal"></span>
 							    	</div>
 							  	</div>
@@ -68,8 +68,8 @@
 							    	<label class="col-sm-3 control-label">Name</label>
 							    	<div class="col-sm-9">
 							      		<input type="text" class="form-control" name="nameModal" id="nameModal">
-                                        <span class="glyphicon glyphicon-remove form-control-feedback" ></span>
-                                        <span class="errorMessage"></span>
+                                        <span class="glyphicon form-control-feedback" id="span2"></span>
+                                        <span class="errorMessage" id="nameSpan"></span>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">

@@ -105,6 +105,25 @@ public class StudentDao {
 			return false;
 		}
 	}
+	public boolean updateStudent(String id,String name,int gender,String university,String classes) throws SQLException{
+		java.sql.PreparedStatement ps = con.prepareStatement("update student_tbl set name=?,gender=?,university=?,class=? where id=?");
+		ps.setString(1, id);
+		ps.setString(2,name);
+		ps.setInt(3, gender);
+		ps.setString(4, university);
+		ps.setString(5, classes);
+		ps.setString(6, id);
+		int result = ps.executeUpdate();
+		if (result > 0) {
+			System.out.println("update sucess");
+			con.close();
+			return true;
+		} else {
+			System.out.println("update fail");
+			con.close();
+			return false;
+		}
+	}
 	public boolean validateStudentId(String id) throws SQLException{
 		java.sql.PreparedStatement ps = con.prepareStatement("select * from student_tbl where id=? ");
 		ps.setString(1, id);
