@@ -15,6 +15,7 @@ import controller.student.GetClass;
 import controller.student.ValidateStudentId;
 import controller.student.ListStudent;
 import controller.student.UpdateStatus;
+import controller.student.UpdateStudent;
 
 
 @WebServlet("*.pheak")
@@ -58,6 +59,9 @@ public class FrontController extends HttpServlet {
 			break;
 		case "/insertStudent.pheak":
 			iAction = new AddStudent();
+			break;
+		case "/updateStudent.pheak":
+			iAction = new UpdateStudent();
 			break;
 		case "/className.pheak":
 			iAction = new GetClass();

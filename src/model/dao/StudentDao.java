@@ -46,7 +46,9 @@ public class StudentDao {
 
 			tempList.add(stu);
 		}
-		con.close();
+		if (con!=null) {
+			con.close();
+		}
 		return tempList;
 	}
 	public ArrayList<String> getAllClassName() throws SQLException{
@@ -56,19 +58,24 @@ public class StudentDao {
 		while(rs.next()){
 			classes.add(rs.getString("class"));
 		}
+		if (con!=null) {
+			con.close();
+		}
 		return classes;
+		
 	}
 	public boolean updateStudent(String id) throws SQLException {
 		java.sql.PreparedStatement ps = con.prepareStatement("update student_tbl set status=NOT status where id=?");
 		ps.setString(1, id);
 		int result = ps.executeUpdate();
+		if (con!=null) {
+			con.close();
+		}
 		if (result > 0) {
 			System.out.println("update sucess");
-			con.close();
 			return true;
 		} else {
 			System.out.println("update fail");
-			con.close();
 			return false;
 		}
 	}
@@ -76,13 +83,14 @@ public class StudentDao {
 		java.sql.PreparedStatement ps = con.prepareStatement("delete from student_tbl where id=?");
 		ps.setString(1, id);
 		int result = ps.executeUpdate();
+		if (con!=null) {
+			con.close();
+		}
 		if (result > 0) {
 			System.out.println("delete sucess");
-			con.close();
 			return true;
 		} else {
 			System.out.println("delete fail");
-			con.close();
 			return false;
 		}
 	}
@@ -95,15 +103,17 @@ public class StudentDao {
 		ps.setString(5, classes);
 		ps.setBoolean(6,status);
 		int result = ps.executeUpdate();
+		if (con!=null) {
+			con.close();
+		}
 		if (result > 0) {
 			System.out.println("insert sucess");
-			con.close();
 			return true;
 		} else {
 			System.out.println("insert fail");
-			con.close();
 			return false;
 		}
+		
 	}
 	public boolean updateStudent(String id,String name,int gender,String university,String classes) throws SQLException{
 		java.sql.PreparedStatement ps = con.prepareStatement("update student_tbl set name=?,gender=?,university=?,class=? where id=?");
@@ -114,20 +124,25 @@ public class StudentDao {
 		ps.setString(5, classes);
 		ps.setString(6, id);
 		int result = ps.executeUpdate();
+		if (con!=null) {
+			con.close();
+		}
 		if (result > 0) {
 			System.out.println("update sucess");
-			con.close();
 			return true;
 		} else {
 			System.out.println("update fail");
-			con.close();
 			return false;
 		}
+		
 	}
 	public boolean validateStudentId(String id) throws SQLException{
 		java.sql.PreparedStatement ps = con.prepareStatement("select * from student_tbl where id=? ");
 		ps.setString(1, id);
 		ResultSet rs = ps.executeQuery();
+		if (con!=null) {
+			con.close();
+		}
 		if(rs.isBeforeFirst()){
 			System.err.println("Duplicate Id");
 			return false;
