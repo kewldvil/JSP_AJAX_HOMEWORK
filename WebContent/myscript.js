@@ -4,6 +4,7 @@
 
             function setTableData(JSONData) {
                 var tableHead = "";
+                // tableHead +='<div class="alert alert-success">Inserted Success !</div>';
                 tableHead += '<table class="table">';
                 tableHead += '<thead>';
                 tableHead += '<th>Id</th>';
@@ -94,7 +95,9 @@
                         id: id
                     },
                     success: function(e) {
+                        $('.alert').html('Deleted Success !');
                         deleteRow(selector);
+                        $('.alert').slideDown(1000).slideUp(1000);
                     }
                 });
 
@@ -115,10 +118,6 @@
                 $('#university').val(university);
                 $('#classes').val(classes);
             }
-            $('#updateStudentBtn').click(function(e) {
-                alert('');
-            });
-
             function deleteRow(selector) {
                 selector.parentsUntil("tbody").remove();
             }
@@ -136,7 +135,10 @@
                     university: university,
                     classes: classes
                 }, function() {
+
                     getStudentList();
+                    $('.alert').slideDown(1000).slideUp(1000);
+
                 });
             }
 
@@ -153,7 +155,9 @@
                     university: university,
                     classes: classes
                 }, function() {
+                    $('.alert').html('Updated Success !');
                     getStudentList();
+                    $('.alert').slideDown(1000).slideUp(1000);
                     $('#myModal').modal('hide');
                 });
             }

@@ -4,7 +4,10 @@
         /*        label{
             text-align: center !important;
         }*/
-        
+        .alert{
+            margin-bottom: 0px;
+            display: none;
+        }
         #myAddBtn {
             background-color: rgb(26, 188, 156);
             border-color: transparent;

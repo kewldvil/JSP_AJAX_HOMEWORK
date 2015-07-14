@@ -24,8 +24,9 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
+
                                 <select name="class" id="class" class="form-control">
-                                    <!-- Load from jQuery -->
+                                         <!-- Load from jQuery -->
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -40,6 +41,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="alert alert-success">Inserted Success !</div>
                     <div class="table-responsive">
                         <!-- load from jQuery -->
                     </div>
