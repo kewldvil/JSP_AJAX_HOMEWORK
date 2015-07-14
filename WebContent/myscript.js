@@ -154,6 +154,7 @@
                     classes: classes
                 }, function() {
                     getStudentList();
+                    $('#myModal').modal('hide');
                 });
             }
             $('#myBtnSubmit').click(function(e) {

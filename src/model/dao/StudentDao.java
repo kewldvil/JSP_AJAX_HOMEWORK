@@ -117,12 +117,11 @@ public class StudentDao {
 	}
 	public boolean updateStudent(String id,String name,int gender,String university,String classes) throws SQLException{
 		java.sql.PreparedStatement ps = con.prepareStatement("update student_tbl set name=?,gender=?,university=?,class=? where id=?");
-		ps.setString(1, id);
-		ps.setString(2,name);
-		ps.setInt(3, gender);
-		ps.setString(4, university);
-		ps.setString(5, classes);
-		ps.setString(6, id);
+		ps.setString(1,name);
+		ps.setInt(2, gender);
+		ps.setString(3, university);
+		ps.setString(4, classes);
+		ps.setString(5, id);
 		int result = ps.executeUpdate();
 		if (con!=null) {
 			con.close();
