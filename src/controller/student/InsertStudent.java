@@ -7,11 +7,11 @@ import controller.ActionForward;
 import controller.IAction;
 import model.dao.StudentDao;
 
-public class AddStudent implements IAction {
+public class InsertStudent implements IAction {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String id=request.getParameter("id");
+		String id="13N"+request.getParameter("id");
 		String name=request.getParameter("name");
 		int gender=Integer.parseInt(request.getParameter("gender"));
 		String university=request.getParameter("university");

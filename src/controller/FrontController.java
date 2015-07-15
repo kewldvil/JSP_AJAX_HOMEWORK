@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.student.AddStudent;
+import controller.student.InsertStudent;
 import controller.student.DeleteStudent;
 import controller.student.GetClass;
 import controller.student.ValidateStudentId;
@@ -58,7 +58,7 @@ public class FrontController extends HttpServlet {
 			iAction = new ValidateStudentId();
 			break;
 		case "/insertStudent.pheak":
-			iAction = new AddStudent();
+			iAction = new InsertStudent();
 			break;
 		case "/updateStudent.pheak":
 			iAction = new UpdateStudent();

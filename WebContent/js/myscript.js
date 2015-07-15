@@ -34,8 +34,8 @@
                         content += '</tr>';
                         $('tbody').append(content);
                     });
-                }else{
-                    $('tbody').append('<tr><td colspan="7">...No Record...</td></tr>');
+                } else {
+                    $('tbody').append('<tr><td colspan="7">No Record...</td></tr>');
                 }
 
             }
@@ -71,7 +71,20 @@
                         updateStatus($(this));
                     });
                     $('.delete').click(function(e) {
-                        deleteStudent($(this));
+                        var deleteThis = $(this);
+                        swal({
+                                title: "Are you sure?",
+                                text: "Your will not be able to recover this record!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Yes",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                deleteStudent(deleteThis);
+                                swal("Deleted!", "Your record has been deleted.", "success");
+                            });
                     });
                     $('.update').click(function(e) {
                         updateClick = $(this);
@@ -100,9 +113,7 @@
                         id: id
                     },
                     success: function(e) {
-                        $('.alert').html('Deleted Success !');
                         deleteRow(selector);
-                        $('.alert').slideDown(1000).slideUp(1000);
                     }
                 });
 
@@ -126,13 +137,28 @@
 
             function deleteRow(selector) {
                 var rowCount = $('tbody tr').length;
-                if(rowCount==1){
+                if (rowCount == 1) {
                     selector.parentsUntil("tbody").remove();
-                    $('tbody').append('<tr><td colspan="7">...No Record...</td></tr>');
-                }else{
+                    $('tbody').append('<tr><td colspan="7">No Record...</td></tr>');
+                } else {
                     selector.parentsUntil("tbody").remove();
                 }
             }
+            $("#id").keydown(function(e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                    // Allow: Ctrl+A, Command+A
+                    (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
 
             function addStudent() {
                 var id = $('#id').val();
@@ -149,7 +175,8 @@
                 }, function() {
 
                     getStudentList();
-                    $('.alert').slideDown(1000).slideUp(1000);
+                    swal("Inserted Success !", "", "success");
+                    // $('.alert').slideDown(1000).slideUp(1000);
 
                 });
             }
@@ -167,11 +194,10 @@
                     university: university,
                     classes: classes
                 }, function() {
-                    $('.alert').html('Updated Success !');
+                    $('#myModal').modal('hide');
                     // getStudentList();
                     updateTableRow(updateClick);
-                    $('.alert').slideDown(1000).slideUp(1000);
-                    $('#myModal').modal('hide');
+                    swal("Updated Success !", "", "success");
                 });
             }
 
