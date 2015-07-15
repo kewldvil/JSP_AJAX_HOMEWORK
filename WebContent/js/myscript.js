@@ -83,7 +83,12 @@
                             },
                             function() {
                                 deleteStudent(deleteThis);
-                                swal("Deleted!", "Your record has been deleted.", "success");
+                                swal({
+                                    title: "Deleted Success!",
+                                    timer: 800,
+                                    showConfirmButton: false,
+                                    type: "success"
+                                });
                             });
                     });
                     $('.update').click(function(e) {
@@ -157,6 +162,7 @@
                 // Ensure that it is a number and stop the keypress
                 if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                     e.preventDefault();
+                    
                 }
             });
 
@@ -175,7 +181,12 @@
                 }, function() {
 
                     getStudentList();
-                    swal("Inserted Success !", "", "success");
+                    swal({
+                        title: "Inserted Success!",
+                        timer: 800,
+                        showConfirmButton: false,
+                        type: "success"
+                    });
                     // $('.alert').slideDown(1000).slideUp(1000);
 
                 });
@@ -197,7 +208,12 @@
                     $('#myModal').modal('hide');
                     // getStudentList();
                     updateTableRow(updateClick);
-                    swal("Updated Success !", "", "success");
+                    swal({
+                        title: "Updated Success!",
+                        timer: 800,
+                        showConfirmButton: false,
+                        type: "success"
+                    });
                 });
             }
 
