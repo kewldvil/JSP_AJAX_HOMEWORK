@@ -2,9 +2,9 @@
             getStudentList();
             //getClassName();
             var updateClick;
+
             function setTableData(JSONData) {
                 var tableHead = "";
-                // tableHead +='<div class="alert alert-success">Inserted Success !</div>';
                 tableHead += '<table class="table">';
                 tableHead += '<thead>';
                 tableHead += '<th>Id</th>';
@@ -19,20 +19,25 @@
                 tableHead += '</tbody>';
                 tableHead += '</table>';
                 $('.table-responsive').html(tableHead);
-                $.each(JSONData, function(i, student) {
-                    var gender = student.gender == 1 ? "Male" : "Female";
-                    var imageUrl = student.status == 1 ? "active.png" : "inActive.png";
-                    var content = '<tr>';
-                    content += '<td>' + student.id + '</td>';
-                    content += '<td>' + student.name + '</td>';
-                    content += '<td>' + gender + '</td>';
-                    content += '<td>' + student.university + '</td>';
-                    content += '<td>' + student.classes + '</td>';
-                    content += '<td><a href="#" id="' + student.id + '" class="statusLink"><img src="img/' + imageUrl + '" width="25px" height="25px" /></a></td>';
-                    content += '<td><a href="#" id="' + student.id + '" class="update" data-toggle="modal" data-target="#myModal"><img src="img/edit.png" width="25px" height="25px" title="Edit"/></a>&nbsp;&nbsp;&nbsp;<a href="#" id="' + student.id + '" class="delete"><img src="img/delete.png" width="25px" height="25px" title="Delete"/></a></td>';
-                    content += '</tr>';
-                    $('tbody').append(content);
-                });
+                if (JSONData.length > 0) {
+                    $.each(JSONData, function(i, student) {
+                        var gender = student.gender == 1 ? "Male" : "Female";
+                        var imageUrl = student.status == 1 ? "active.png" : "inActive.png";
+                        var content = '<tr>';
+                        content += '<td>' + student.id + '</td>';
+                        content += '<td>' + student.name + '</td>';
+                        content += '<td>' + gender + '</td>';
+                        content += '<td>' + student.university + '</td>';
+                        content += '<td>' + student.classes + '</td>';
+                        content += '<td><a href="#" id="' + student.id + '" class="statusLink"><img src="img/' + imageUrl + '" width="25px" height="25px" /></a></td>';
+                        content += '<td><a href="#" id="' + student.id + '" class="update" data-toggle="modal" data-target="#myModal"><img src="img/edit.png" width="25px" height="25px" title="Edit"/></a>&nbsp;&nbsp;&nbsp;<a href="#" id="' + student.id + '" class="delete"><img src="img/delete.png" width="25px" height="25px" title="Delete"/></a></td>';
+                        content += '</tr>';
+                        $('tbody').append(content);
+                    });
+                }else{
+                    $('tbody').append('<tr><td colspan="7">...No Record...</td></tr>');
+                }
+
             }
 
             // function getClassName() {
@@ -52,7 +57,6 @@
             //                 "value", item).text(item));
             //     });
             // }
-
             function getStudentList() {
                 var name = $('#name').val();
                 var status = $('#status').val();
@@ -70,7 +74,7 @@
                         deleteStudent($(this));
                     });
                     $('.update').click(function(e) {
-                        updateClick=$(this);
+                        updateClick = $(this);
                         updateModal($(this));
                     });
                 });
@@ -119,8 +123,15 @@
                 $('#university').val(university);
                 $('#classes').val(classes);
             }
+
             function deleteRow(selector) {
-                selector.parentsUntil("tbody").remove();
+                var rowCount = $('tbody tr').length;
+                if(rowCount==1){
+                    selector.parentsUntil("tbody").remove();
+                    $('tbody').append('<tr><td colspan="7">...No Record...</td></tr>');
+                }else{
+                    selector.parentsUntil("tbody").remove();
+                }
             }
 
             function addStudent() {
@@ -163,10 +174,11 @@
                     $('#myModal').modal('hide');
                 });
             }
-            function updateTableRow(selector){
+
+            function updateTableRow(selector) {
                 var row = selector.parents('tr').find('td');
-                 var name = $('#nameModal').val();
-                var gender = ($('#gender').val()==1)?"Male":"Female";
+                var name = $('#nameModal').val();
+                var gender = ($('#gender').val() == 1) ? "Male" : "Female";
                 var university = $('#university').val();
                 var classes = $('#classes').val();
 
@@ -195,15 +207,15 @@
                         $('#nameSpan').text('Name can not be empty !');
                         $('#span2').addClass('glyphicon-remove');
                     }
-                }else{
-                    if($('#nameModal').val()!=""){
+                } else {
+                    if ($('#nameModal').val() != "") {
                         updateStudent($('#id').val());
-                    }else{
+                    } else {
                         $('.modal-body').find('.form-group').eq(1).addClass('has-error');
                         $('#nameSpan').text('Name can not be empty !');
                         $('#span2').addClass('glyphicon-remove');
                     }
-                    
+
                 }
             });
             $('input[type="text"]').focus(function(e) {
