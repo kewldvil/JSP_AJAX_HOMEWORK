@@ -26,7 +26,11 @@
                             <div class="col-md-2">
 
                                 <select name="class" id="class" class="form-control">
-                                         <!-- Load from jQuery -->
+                                		 <option value="">All Class</option>
+                                         <option value="PP">PP</option>
+						      			<option value="KPS">KPS</option>
+						      			<option value="SR">SR</option>
+						      			<option value="BTB">BTB</option>
                                 </select>
                             </div>
                             <div class="col-md-2">

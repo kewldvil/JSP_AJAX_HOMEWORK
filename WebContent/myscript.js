@@ -1,7 +1,7 @@
         $(document).ready(function() {
             getStudentList();
-            getClassName();
-
+            //getClassName();
+            var updateClick;
             function setTableData(JSONData) {
                 var tableHead = "";
                 // tableHead +='<div class="alert alert-success">Inserted Success !</div>';
@@ -35,23 +35,23 @@
                 });
             }
 
-            function getClassName() {
-                $.post('className.pheak', function(data) {
-                    setSelectOption(data);
-                });
-            }
+            // function getClassName() {
+            //     $.post('className.pheak', function(data) {
+            //         setSelectOption(data);
+            //     });
+            // }
 
-            function setSelectOption(JSONClassname) {
-                $('#class').html(
-                    $("<option></option>")
-                    .attr("value", "").text(
-                        "All Class"));
-                $.each(JSONClassname, function(i, item) {
-                    $('#class').append(
-                        $("<option></option>").attr(
-                            "value", item).text(item));
-                });
-            }
+            // function setSelectOption(JSONClassname) {
+            //     $('#class').html(
+            //         $("<option></option>")
+            //         .attr("value", "").text(
+            //             "All Class"));
+            //     $.each(JSONClassname, function(i, item) {
+            //         $('#class').append(
+            //             $("<option></option>").attr(
+            //                 "value", item).text(item));
+            //     });
+            // }
 
             function getStudentList() {
                 var name = $('#name').val();
@@ -70,6 +70,7 @@
                         deleteStudent($(this));
                     });
                     $('.update').click(function(e) {
+                        updateClick=$(this);
                         updateModal($(this));
                     });
                 });
@@ -156,10 +157,23 @@
                     classes: classes
                 }, function() {
                     $('.alert').html('Updated Success !');
-                    getStudentList();
+                    // getStudentList();
+                    updateTableRow(updateClick);
                     $('.alert').slideDown(1000).slideUp(1000);
                     $('#myModal').modal('hide');
                 });
+            }
+            function updateTableRow(selector){
+                var row = selector.parents('tr').find('td');
+                 var name = $('#nameModal').val();
+                var gender = ($('#gender').val()==1)?"Male":"Female";
+                var university = $('#university').val();
+                var classes = $('#classes').val();
+
+                row.eq(1).text(name);
+                row.eq(2).text(gender);
+                row.eq(3).text(university);
+                row.eq(4).text(classes);
             }
             $('#myBtnSubmit').click(function(e) {
                 if ($(this).text() == "Add") {
